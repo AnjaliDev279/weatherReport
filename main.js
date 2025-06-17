@@ -4,13 +4,13 @@
 
 
 async function getWeather() {
-//   const city = document.getElementById('cityInput').value || 'Colombo';
-//   const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`;
+const city = document.getElementById('cityInput').value || 'Colombo';
+const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`;
 
  
 
-  //document.getElementById('weather').innerHTML = 'Loading...';
-     const response = await fetch(`/api/weather?city=${city}`);
+  document.getElementById('weather').innerHTML = 'Loading...';
+     const response = await fetch(url);
  
     if (!response.ok) throw new Error('City not found');
     
