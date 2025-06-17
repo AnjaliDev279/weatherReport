@@ -1,19 +1,10 @@
-
-
-//const API_KEY = 'ab5897f3ba6f43a0b51134335251706';  
-
-
 async function getWeather() {
-//   const city = document.getElementById('cityInput').value || 'Colombo';
-//   const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`;
+  const city = document.getElementById('cityInput').value || 'Colombo';
 
- 
-
-  //document.getElementById('weather').innerHTML = 'Loading...';
-     const response = await fetch(`/api/weather?city=${city}`);
- 
+  try {
+    const response = await fetch(`/api/weather?city=${city}`);
     if (!response.ok) throw new Error('City not found');
-    
+
     const data = await response.json();
     const current = data.current;
 
@@ -24,8 +15,12 @@ async function getWeather() {
       <p><strong>Wind Speed:</strong> ${current.wind_kph} kph</p>
       <p><strong>UV Index:</strong> ${current.uv}</p>
     `;
-  } 
+  } catch (error) {
+    document.getElementById('weather').innerHTML = `<p style="color:red;">${error.message}</p>`;
+  }
+}
 
-
-// Load default city on page load
-window.onload = getWeather;
+window.onload = () => {
+  document.getElementById('cityInput').value = 'Colombo';
+  getWeather();
+};
